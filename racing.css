@@ -1,0 +1,137 @@
+/* ===== RACING MODE UI ===== */
+.rhud{position:absolute;inset:0;z-index:6;pointer-events:none;display:none;font-family:'Barlow Condensed',Arial,sans-serif;font-style:italic}
+.racing-ui .rhud{display:block}
+.fx-cv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;mix-blend-mode:screen}
+/* hide the classic HUD blocks while racing */
+.racing-ui .metric,.racing-ui .health-hud,.racing-ui .task-hud,.racing-ui .speed-hud{display:none!important}
+.racing-ui .hud{justify-content:flex-end}
+/* position */
+.r-pos{position:absolute;left:clamp(10px,2.2%,26px);top:clamp(8px,2%,18px);color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.7);display:flex;align-items:baseline;gap:4px;transform:skewX(-6deg)}
+.r-pos b{font:900 clamp(38px,8.6vh,76px)/1 'Barlow Condensed',Arial,sans-serif;color:#fff;transition:transform .2s,color .2s}
+.r-pos b.up{color:#7dff6a;transform:scale(1.25)}
+.r-pos span{font:800 clamp(14px,2.7vh,24px)/1 'Barlow Condensed',Arial,sans-serif;color:#ffe45c}
+/* speedometer */
+.r-spd{position:absolute;left:50%;top:clamp(4px,1.2%,12px);width:clamp(210px,40%,400px);aspect-ratio:3.6/1;transform:translateX(-50%);filter:drop-shadow(0 4px 10px rgba(0,0,0,.5))}
+.r-spd svg{position:absolute;inset:0;width:100%;height:100%}
+.r-spd-n{position:absolute;left:0;right:0;top:3%;text-align:center;color:#1b1600;display:flex;justify-content:center;align-items:baseline;gap:6px;line-height:1}
+.r-spd-n b{font:900 clamp(26px,6.2vh,54px)/1 'Barlow Condensed',Arial,sans-serif;letter-spacing:1px;font-variant-numeric:tabular-nums}
+.r-spd-n small{font:800 clamp(10px,1.8vh,16px)/1 'Barlow Condensed',Arial,sans-serif}
+/* lap + time (below the icon buttons) */
+.r-lap{position:absolute;right:clamp(10px,2.2%,24px);top:clamp(52px,11.5%,66px);text-align:right;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.7)}
+.r-lapn{font:900 clamp(18px,3.8vh,32px)/1 'Barlow Condensed',Arial,sans-serif}
+.r-lapn b{color:#fff}.r-lapn span{font-size:.62em;color:#ffe45c;font-weight:800}
+.r-time{font:800 clamp(12px,2.3vh,20px)/1.1 'Barlow Condensed',Arial,sans-serif;color:#cfe3ff;font-variant-numeric:tabular-nums;margin-top:2px}
+.r-fin{font:800 clamp(10px,1.8vh,15px)/1.2 'Barlow Condensed',Arial,sans-serif;color:#ffe45c;letter-spacing:1px}
+/* nitro tank (left edge) */
+.r-nit{position:absolute;left:clamp(8px,1.6%,18px);top:30%;height:34%;width:clamp(10px,1.5vh,16px);border-radius:10px;background:rgba(5,12,24,.55);border:1px solid rgba(120,200,255,.5);overflow:hidden;box-shadow:0 0 12px rgba(40,120,255,.25)}
+.r-nit i{position:absolute;left:0;right:0;bottom:0;height:0;background:linear-gradient(0deg,#1f8bff,#7ee7ff);transition:height .08s}
+.r-nit.on i{background:linear-gradient(0deg,#9b5cff,#e1c6ff);box-shadow:0 0 14px #b48cff}
+.r-nit.full{border-color:#7dff6a;box-shadow:0 0 14px rgba(125,255,106,.7)}
+.r-nit span{display:none}
+/* stunt feed (right side) */
+.r-feed{position:absolute;right:clamp(10px,2.2%,24px);top:clamp(110px,27%,170px);width:clamp(150px,24%,260px);display:flex;flex-direction:column;gap:2px;align-items:stretch}
+.rf{display:flex;justify-content:space-between;gap:10px;color:#ffee3a;font:900 clamp(13px,2.5vh,22px)/1.05 'Barlow Condensed',Arial,sans-serif;letter-spacing:.5px;text-transform:uppercase;border-bottom:2px solid rgba(255,238,58,.85);padding:1px 2px 1px;text-shadow:0 2px 6px rgba(0,0,0,.85);animation:rfin .18s ease-out;background:linear-gradient(90deg,transparent,rgba(0,0,0,.28))}
+.rf b{font-weight:900;color:#fff7a8;font-variant-numeric:tabular-nums}
+@keyframes rfin{from{transform:translateX(24px);opacity:0}to{transform:none;opacity:1}}
+/* rival tags */
+.r-tags .rtag{position:absolute;transform:translate(-50%,-100%);text-align:center;color:#fff;text-shadow:0 2px 6px #000;line-height:1;display:none}
+.rtag b{display:block;font:900 clamp(18px,3.4vh,30px)/1 'Barlow Condensed',Arial,sans-serif;color:#ffd400}
+.rtag small{display:block;font:700 clamp(9px,1.6vh,13px)/1 'Barlow Condensed',Arial,sans-serif;opacity:.9;white-space:nowrap}
+/* center banner */
+.rbn{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%) scale(.6);opacity:0;color:#fff;font:900 clamp(64px,20vh,180px)/1 'Barlow Condensed',Arial,sans-serif;text-shadow:0 0 28px rgba(80,160,255,.9),0 6px 18px rgba(0,0,0,.7);white-space:nowrap;letter-spacing:2px}
+.rbn.on{animation:rbn .9s ease-out forwards}
+.rbn.go{color:#7dff6a;text-shadow:0 0 30px rgba(80,255,120,.9),0 6px 18px rgba(0,0,0,.7)}
+.rbn.pn{color:#ffe45c;font-size:clamp(28px,8vh,64px);top:33%;text-shadow:0 0 22px rgba(255,200,40,.95),0 4px 12px rgba(0,0,0,.7)}
+.rbn.pn.on{animation:rbnp .9s ease-out forwards}
+.rbn.fin{color:#fff;font-size:clamp(90px,28vh,240px);text-shadow:0 0 40px rgba(255,214,80,.95),0 8px 22px rgba(0,0,0,.7)}
+.rbn.fin.on{animation:rbnf 3.2s ease-out forwards}
+@keyframes rbn{0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}18%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}35%{transform:translate(-50%,-50%) scale(1)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.25)}}
+@keyframes rbnp{0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}20%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-70%) scale(1)}}
+@keyframes rbnf{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}10%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}16%{transform:translate(-50%,-50%) scale(1)}90%{opacity:1}100%{opacity:0}}
+/* nitro button states */
+.nitro-btn.perfect{animation:pnpulse .35s infinite alternate;box-shadow:0 0 0 3px #ffe45c,0 0 26px 6px rgba(255,220,80,.9)!important}
+@keyframes pnpulse{from{transform:scale(1)}to{transform:scale(1.12)}}
+/* ===== level cards ===== */
+.rcards{display:none;position:absolute;left:0;right:0;top:calc(var(--mt) + 10px);bottom:calc(var(--mb) + 6px);z-index:3;overflow-x:auto;overflow-y:hidden;gap:16px;padding:14px clamp(14px,4%,40px);align-items:center;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.mapscreen.rc-on .rcards{display:flex}
+.mapscreen.rc-on .map-scroll{visibility:hidden}
+.mapscreen.rc-on #mapInfo{display:none}
+.rc{position:relative;flex:0 0 auto;width:clamp(170px,21vw,230px);height:min(100%,330px);border-radius:16px;padding:14px 14px 12px;color:#fff;overflow:hidden;scroll-snap-align:center;cursor:pointer;border:2px solid rgba(255,255,255,.14);background:#14233b;box-shadow:0 10px 26px rgba(0,0,0,.45);transition:transform .18s,border-color .18s,box-shadow .18s;display:flex;flex-direction:column;gap:6px}
+.rc.day{background:linear-gradient(160deg,#ff9a3c 0%,#d9506a 45%,#3a2a6b 100%)}
+.rc.night{background:linear-gradient(160deg,#2a3f8f 0%,#141f4d 55%,#080c22 100%)}
+.rc.rain{background:linear-gradient(160deg,#5d7a92 0%,#2e4256 55%,#141f2c 100%)}
+.rc.storm{background:linear-gradient(160deg,#6a2fb0 0%,#241a52 50%,#0a0a1f 100%)}
+.rc::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.05) 0 6px,transparent 6px 14px);pointer-events:none}
+.rc:hover{transform:translateY(-4px)}
+.rc.sel{border-color:#6ff0ef;box-shadow:0 0 0 2px rgba(111,240,239,.4),0 14px 34px rgba(0,0,0,.6),0 0 30px rgba(111,240,239,.35);transform:translateY(-6px) scale(1.02)}
+.rc-top{display:flex;justify-content:space-between;align-items:center}
+.rc-top i{font:900 34px/1 'Barlow Condensed',sans-serif;font-style:italic;color:rgba(255,255,255,.9)}
+.rc-top span{font-size:30px;filter:drop-shadow(0 3px 6px rgba(0,0,0,.5))}
+.rc h4{font:900 clamp(20px,2.7vw,26px)/1 'Barlow Condensed',sans-serif;font-style:italic;letter-spacing:.5px;margin:2px 0 0}
+.rc p{font:500 12px/1.25 'DM Sans',sans-serif;color:rgba(255,255,255,.78);margin:0;min-height:30px}
+.rc-st{display:flex;gap:14px;margin-top:2px}
+.rc small{display:block;font:800 9px/1 'DM Sans',sans-serif;letter-spacing:1.6px;color:rgba(255,255,255,.62)}
+.rc-st b{font:900 20px/1.1 'Barlow Condensed',sans-serif}
+.rc-df u{text-decoration:none;color:#ffd21f;letter-spacing:2px;font-size:15px}.rc-df s{text-decoration:none;color:rgba(255,255,255,.25)}
+.rc-rw{font:700 13px 'DM Sans',sans-serif;color:#ffe08a;margin-top:auto}.rc-rw b{font:900 17px 'Barlow Condensed',sans-serif}
+.rc-bst{font:700 11px 'DM Sans',sans-serif;color:#b8f5ff;min-height:14px}.rc-bst b{color:#fff}
+.rc-tag{position:absolute;top:10px;right:-30px;transform:rotate(40deg);background:#6ff0ef;color:#05233a;font:900 10px/1 'DM Sans',sans-serif;letter-spacing:1.4px;padding:4px 34px;font-style:normal}
+.rc.lock{filter:saturate(.35) brightness(.7)}
+.rc-lock{position:absolute;inset:0;background:rgba(4,10,22,.62);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;font:700 12px/1.35 'DM Sans',sans-serif;color:#cfeaff}
+.rc-lock b{font-size:38px}
+.rc.shake{animation:rcsh .4s}@keyframes rcsh{25%{transform:translateX(-7px)}50%{transform:translateX(7px)}75%{transform:translateX(-4px)}}
+/* ===== results ===== */
+.rres{position:absolute;inset:0;z-index:70;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;padding:16px}
+.rres.hidden{display:none}
+.rres-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(24,60,120,.82),rgba(3,8,20,.94) 70%);backdrop-filter:blur(3px)}
+.rres-main{position:relative;width:min(760px,94%);max-height:76%;overflow:auto}
+.rr-view.hidden{display:none}
+.rr-win{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.rr-badge{width:clamp(110px,26vh,170px);aspect-ratio:1/1.12;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;clip-path:polygon(50% 0,100% 12%,100% 70%,50% 100%,0 70%,0 12%);background:linear-gradient(160deg,#ffe27a,#f0a800 55%,#a86d00);position:relative;filter:drop-shadow(0 8px 20px rgba(255,190,40,.55))}
+.rr-badge::before{content:'';position:absolute;inset:7px;clip-path:inherit;background:linear-gradient(160deg,#1d4f9c,#0c2a5c)}
+.rr-badge small,.rr-badge b{position:relative}
+.rr-badge small{font:900 clamp(11px,2.1vh,16px)/1 'Barlow Condensed',sans-serif;letter-spacing:3px;color:#ffe45c;font-style:italic}
+.rr-badge b{font:900 clamp(52px,13vh,92px)/1 'Barlow Condensed',sans-serif;font-style:italic}
+.rr-badge.lo{background:linear-gradient(160deg,#cfd8e3,#8794a6 55%,#4c586a);filter:drop-shadow(0 8px 20px rgba(150,180,220,.35))}
+.rr-car b{display:block;font:900 clamp(20px,4vh,32px)/1.1 'Barlow Condensed',sans-serif;font-style:italic;color:#fff}
+.rr-car span{font:600 13px 'DM Sans',sans-serif;color:#9cc2de}
+.rr-stats{display:flex;gap:clamp(10px,3vw,30px);flex-wrap:wrap;justify-content:center}
+.rr-stats div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:8px 16px;min-width:92px}
+.rr-stats small{display:block;font:800 9px 'DM Sans',sans-serif;letter-spacing:1.6px;color:#8fb6d6}.rr-stats b{font:900 22px 'Barlow Condensed',sans-serif;color:#ffe08a}
+.rr-stats .tot{background:linear-gradient(135deg,rgba(255,200,40,.28),rgba(255,160,0,.12));border-color:rgba(255,210,80,.6)}.rr-stats .tot b{color:#fff}
+.rr-line{font:700 12px/1.6 'DM Sans',sans-serif;color:#b8d4ea}.rr-line b{color:#ffee3a}
+.rr-unlock{font:800 13px 'DM Sans',sans-serif;color:#7dff6a;background:rgba(80,255,120,.1);border:1px solid rgba(80,255,120,.4);padding:6px 14px;border-radius:99px}
+.rr-bt{font:900 24px 'Barlow Condensed',sans-serif;font-style:italic;color:#fff;margin-bottom:8px;text-align:center;letter-spacing:1px}
+.rr-row{display:grid;grid-template-columns:38px 1.3fr 1.3fr 110px;align-items:center;gap:8px;padding:7px 12px;margin-bottom:4px;border-radius:8px;background:rgba(255,255,255,.06);font:600 14px 'DM Sans',sans-serif;color:#dbe9f6}
+.rr-row i{font:900 22px 'Barlow Condensed',sans-serif;font-style:italic;color:#ffd21f}
+.rr-row em{font-style:normal;color:#8fb6d6;font-size:12px}.rr-row b{font:800 15px 'Barlow Condensed',sans-serif;text-align:right;font-variant-numeric:tabular-nums}
+.rr-row.me{background:linear-gradient(90deg,rgba(111,240,239,.28),rgba(111,240,239,.1));border:1px solid rgba(111,240,239,.6);color:#fff}
+.rres-btns{position:relative;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.rr-b{padding:11px 22px;border-radius:10px;border:1px solid rgba(159,216,255,.4);background:#0f2442;color:#cfeaff;font:900 18px 'Barlow Condensed',sans-serif;font-style:italic;letter-spacing:2px;cursor:pointer}
+.rr-b:hover{background:#17335c}
+.rr-b.go{background:linear-gradient(110deg,#6ff0ef,#2aa8e8);color:#05233a;border-color:transparent;min-width:130px}
+@media (max-height:430px){.rr-badge{width:92px}.rr-stats div{padding:5px 10px}.rr-line{font-size:10px}}
+.mapscreen.rc-on .mode-card{display:none!important}
+.racing-ui .graphics-control{display:none!important}
+/* ===== city levels: tabs, turn pacenotes, minimap ===== */
+.rc-tabs{display:none;position:absolute;left:50%;transform:translateX(-50%);top:calc(var(--mt) + 4px);z-index:4;gap:8px}
+.mapscreen.rc-on .rc-tabs{display:flex}
+.rc-tabs button{padding:6px 18px;border-radius:99px;border:1px solid rgba(159,216,255,.35);background:rgba(10,26,50,.75);color:#9cc2de;font:900 15px 'Barlow Condensed',sans-serif;font-style:italic;letter-spacing:2px;cursor:pointer}
+.rc-tabs button.on{background:linear-gradient(110deg,#6ff0ef,#2aa8e8);color:#05233a;border-color:transparent}
+.mapscreen.rc-on .rcards{top:calc(var(--mt) + 40px)}
+.r-turn{position:absolute;left:50%;top:clamp(62px,15%,96px);transform:translateX(-50%);display:none;align-items:center;gap:8px;padding:3px 14px;border-radius:99px;background:rgba(5,14,30,.6);border:1px solid rgba(111,240,239,.55);color:#fff;font:900 clamp(16px,3.2vh,26px)/1 'Barlow Condensed',sans-serif}
+.r-turn i{font-style:normal;color:#6ff0ef}.r-turn em{font-style:italic;color:#fff;background:#e11d3a;padding:2px 8px;border-radius:6px;font-size:.8em}
+.r-turn.warn{border-color:#ff4d5e;animation:rtw .3s infinite alternate}.r-turn.warn i{color:#ff7a86}
+@keyframes rtw{from{background:rgba(70,8,16,.7)}to{background:rgba(150,12,28,.85)}}
+.r-map{position:absolute;left:clamp(8px,1.6%,18px);top:clamp(62px,15%,92px);width:clamp(84px,17vh,132px);height:clamp(84px,17vh,132px);display:none;opacity:.92}
+.rbn.wrong{color:#ff4d5e;font-size:clamp(34px,10vh,80px);top:30%;text-shadow:0 0 22px rgba(255,60,80,.9),0 4px 12px #000}
+.r-nit{top:46%}
+/* ===== pedals: ACCEL + BRAKE + NITRO (all control skins) ===== */
+.gas-btn{display:none}
+#gameShell.racing-ui .gas-btn{display:flex!important;position:absolute!important;right:14px!important;bottom:14px!important;left:auto!important;top:auto!important;width:clamp(76px,16vh,112px)!important;height:clamp(104px,24vh,150px)!important;border-radius:18px!important;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:linear-gradient(180deg,rgba(64,190,70,.92),rgba(20,110,36,.95))!important;border:2px solid rgba(190,255,190,.55)!important;color:#fff;font:900 clamp(20px,4vh,32px)/1 'Barlow Condensed',sans-serif;z-index:7;touch-action:none}
+#gameShell.racing-ui .gas-btn span{font:800 clamp(10px,1.9vh,14px)/1 'DM Sans',sans-serif;letter-spacing:1.4px}
+#gameShell.racing-ui .gas-btn.pressed{transform:scale(.94);filter:brightness(1.25)}
+#gameShell.racing-ui .brake-btn{position:absolute!important;right:calc(clamp(76px,16vh,112px) + 26px)!important;bottom:14px!important;left:auto!important;top:auto!important;width:clamp(70px,14vh,100px)!important;height:clamp(70px,14vh,100px)!important;border-radius:16px!important}
+#gameShell.racing-ui .nitro-btn{position:absolute!important;right:14px!important;bottom:calc(clamp(104px,24vh,150px) + 24px)!important;left:auto!important;top:auto!important;width:clamp(64px,13vh,92px)!important;height:clamp(64px,13vh,92px)!important;border-radius:50%!important}
+#gameShell.racing-ui .steer-controls{position:absolute!important;left:14px!important;right:auto!important;bottom:14px!important;display:flex!important;gap:12px}
+#gameShell.racing-ui .steer-controls .drive-btn{position:relative!important;left:auto!important;right:auto!important;bottom:auto!important;width:clamp(70px,15vh,104px)!important;height:clamp(70px,15vh,104px)!important}
